@@ -3,10 +3,14 @@ package com.example.demo.controllers;
 import com.example.demo.exeptions.CustomException;
 import com.example.demo.models.BookingModel;
 import com.example.demo.service.BookingService;
+import com.example.demo.util.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 @RestController
 @RequestMapping("booking")
@@ -44,8 +48,8 @@ public class BookingController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity getAll() {
-        return new ResponseEntity(bookingService.getAll(), HttpStatus.OK);
+    public ResponseEntity<ApiResponse> getAll() {
+        return new ResponseEntity (new ApiResponse(true, null, bookingService.getAll()), HttpStatus.OK);
     }
 
     @DeleteMapping("/delete/{id}")
